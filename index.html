@@ -43,6 +43,68 @@
       animation: particles 20s linear infinite;
       opacity: 0.5;
     }
+    .slideshow-container {
+      position: relative;
+      max-width: 1200px;
+      margin: 0 auto;
+      overflow: hidden;
+    }
+    .slides-wrapper {
+      display: flex;
+      transition: transform 0.5s ease;
+    }
+    .slide {
+      flex: 0 0 100%;
+      max-width: 1200px;
+      padding: 1.5rem;
+      background: #0f0f1a;
+      border-radius: 0.5rem;
+      margin: 0 10px;
+    }
+    .slide-content {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+    .slide.active .slide-content {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: #00E5FF;
+      padding: 10px;
+      border-radius: 50%;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    .arrow:hover {
+      background: #D500F9;
+      transform: translateY(-50%) scale(1.2);
+      box-shadow: 0 0 15px #D500F9;
+    }
+    .prev { left: 10px; }
+    .next { right: 10px; }
+    .dots {
+      text-align: center;
+      padding: 10px 0;
+    }
+    .dot {
+      display: inline-block;
+      width: 12px;
+      height: 12px;
+      margin: 0 5px;
+      background: #00E5FF;
+      border-radius: 50%;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    .dot.active, .dot:hover {
+      background: #D500F9;
+      transform: scale(1.2);
+    }
     @keyframes particles {
       0% { transform: translateY(0); }
       100% { transform: translateY(-100px); }
@@ -112,6 +174,16 @@
       .submit-btn {
         width: 100%;
       }
+      .slide {
+        flex: 0 0 90vw;
+        margin: 0 5px;
+      }
+      .slide-content h3 {
+        font-size: 1.5rem;
+      }
+      .slide-content p {
+        font-size: 1rem;
+      }
     }
   </style>
 </head>
@@ -164,8 +236,11 @@
       <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
     </button>
   </div>
-  <div id="mobile-menu" class="hidden md:hidden Stuart-5" class="hidden md:hidden fixed top-0 left-0 w-full h-full bg-[#0f0f1a] z-20 p-6">
-    <nav class="space-y-4">
+  <div id="mobile-menu" class="hidden md:hidden fixed top-0 left-0 w-full h-full bg-[#0f0f1a] z-20 p-6">
+    <button id="close-menu" class="absolute top-4 right-4 text-[#00E5FF] neon-border rounded-full p-2 transition-transform">
+      <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+    </button>
+    <nav class="space-y-4 mt-12">
       <a href="index.html" class="block text-lg text-[#00E5FF] font-bold">Home</a>
       <a href="store.html" class="block text-lg hover:text-[#00E5FF] transition">Store</a>
       <a href="tournaments.html" class="block text-lg hover:text-[#00E5FF] transition">Tournaments</a>
@@ -187,6 +262,74 @@
         <div class="space-x-4">
           <a href="createaccount.html" class="inline-block bg-[#00E5FF] text-[#0f0f1a] font-bold py-3 px-6 rounded neon-glow">Join Now</a>
           <a href="tournaments.html" class="inline-block bg-[#D500F9] text-white font-bold py-3 px-6 rounded neon-glow">View Tournaments</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Slideshow Section -->
+    <section class="py-16 px-6">
+      <div class="slideshow-container">
+        <div class="slides-wrapper">
+          <!-- Slide 1: Recent Products -->
+          <div class="slide flex items-center justify-center md:flex-row flex-col gap-8 active">
+            <img src="https://via.placeholder.com/600x400" alt="Recent Products" class="w-full md:w-1/2 h-64 object-cover rounded-lg neon-border neon-glow">
+            <div class="slide-content text-center md:text-left">
+              <h3 class="text-3xl font-bold text-white font-orbitron mb-4">Discover Our Latest Gaming Gear</h3>
+              <p class="text-lg text-[#E0E0E0] mb-6">Explore the newest controllers, keyboards, and headsets designed for ultimate performance.</p>
+              <a href="store.html" class="inline-block submit-btn">Shop Now</a>
+            </div>
+          </div>
+          <!-- Slide 2: Minecraft Server -->
+          <div class="slide flex items-center justify-center md:flex-row flex-col gap-8">
+            <img src="https://via.placeholder.com/600x400" alt="Minecraft Server" class="w-full md:w-1/2 h-64 object-cover rounded-lg neon-border neon-glow">
+            <div class="slide-content text-center md:text-left">
+              <h3 class="text-3xl font-bold text-white font-orbitron mb-4">Join Our Minecraft Server</h3>
+              <p class="text-lg text-[#E0E0E0] mb-6">Dive into epic adventures on our server at <code>play.gamingodyssey.in</code>. Build, battle, and connect!</p>
+              <a href="http://play.gamingodyssey.in" class="inline-block submit-btn">Join Server</a>
+            </div>
+          </div>
+          <!-- Slide 3: Server Ranks -->
+          <div class="slide flex items-center justify-center md:flex-row flex-col gap-8">
+            <img src="https://via.placeholder.com/600x400" alt="Server Ranks" class="w-full md:w-1/2 h-64 object-cover rounded-lg neon-border neon-glow">
+            <div class="slide-content text-center md:text-left">
+              <h3 class="text-3xl font-bold text-white font-orbitron mb-4">Unlock Exclusive Server Ranks</h3>
+              <p class="text-lg text-[#E0E0E0] mb-6">Earn ranks like Legend, Hero, and Elite with unique perks. Level up your Minecraft experience!</p>
+              <a href="#" class="inline-block submit-btn">Learn More</a>
+            </div>
+          </div>
+          <!-- Slide 4: Gaming Odyssey Store -->
+          <div class="slide flex items-center justify-center md:flex-row flex-col gap-8">
+            <img src="https://via.placeholder.com/600x400" alt="Gaming Odyssey Store" class="w-full md:w-1/2 h-64 object-cover rounded-lg neon-border neon-glow">
+            <div class="slide-content text-center md:text-left">
+              <h3 class="text-3xl font-bold text-white font-orbitron mb-4">Shop at Gaming Odyssey Store</h3>
+              <p class="text-lg text-[#E0E0E0] mb-6">From RGB peripherals to esports apparel, find everything you need to dominate.</p>
+              <a href="store.html" class="inline-block submit-btn">Visit Store</a>
+            </div>
+          </div>
+          <!-- Slide 5: Custom PC Building -->
+          <div class="slide flex items-center justify-center md:flex-row flex-col gap-8">
+            <img src="https://via.placeholder.com/600x400" alt="Custom PC Building" class="w-full md:w-1/2 h-64 object-cover rounded-lg neon-border neon-glow">
+            <div class="slide-content text-center md:text-left">
+              <h3 class="text-3xl font-bold text-white font-orbitron mb-4">Build Your Dream Gaming PC</h3>
+              <p class="text-lg text-[#E0E0E0] mb-6">Customize your rig with our expert PC building service. Power up your gameplay!</p>
+              <a href="#" class="inline-block submit-btn">Start Building</a>
+            </div>
+          </div>
+        </div>
+        <!-- Navigation Arrows -->
+        <div class="arrow prev">
+          <svg class="w-6 h-6 text-[#0f0f1a]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
+        </div>
+        <div class="arrow next">
+          <svg class="w-6 h-6 text-[#0f0f1a]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+        </div>
+        <!-- Dots -->
+        <div class="dots">
+          <span class="dot active"></span>
+          <span class="dot"></span>
+          <span class="dot"></span>
+          <span class="dot"></span>
+          <span class="dot"></span>
         </div>
       </div>
     </section>
@@ -339,8 +482,12 @@
     // Hamburger Menu Toggle
     const hamburger = document.getElementById('hamburger');
     const mobileMenu = document.getElementById('mobile-menu');
+    const closeMenu = document.getElementById('close-menu');
     hamburger.addEventListener('click', () => {
-      mobileMenu.classList.toggle('hidden');
+      mobileMenu.classList.remove('hidden');
+    });
+    closeMenu.addEventListener('click', () => {
+      mobileMenu.classList.add('hidden');
     });
 
     // Fade-in Animation on Scroll
@@ -357,15 +504,12 @@
     // Contact Form Submission
     document.getElementById('contact-form').addEventListener('submit', function(event) {
       event.preventDefault();
-
       const name = document.getElementById('name').value.trim();
       const email = document.getElementById('email').value.trim();
       const subject = document.getElementById('subject').value.trim();
       const message = document.getElementById('message').value.trim();
       const status = document.getElementById('form-status');
-
       document.querySelectorAll('.error').forEach(el => el.classList.add('hidden'));
-
       let isValid = true;
       if (!name) {
         document.getElementById('name-error').classList.remove('hidden');
@@ -383,13 +527,11 @@
         document.getElementById('message-error').classList.remove('hidden');
         isValid = false;
       }
-
       if (!isValid) {
         status.textContent = 'Please fill all fields correctly';
         status.className = 'error';
         return;
       }
-
       emailjs.send('service_94tnfxp', 'template_6ahr5g1', {
         name: name,
         email: email,
@@ -404,6 +546,76 @@
         status.className = 'error';
       });
     });
+
+    // Slideshow Functionality
+    const slidesWrapper = document.querySelector('.slides-wrapper');
+    const slides = document.querySelectorAll('.slide');
+    const dots = document.querySelectorAll('.dot');
+    const prevArrow = document.querySelector('.prev');
+    const nextArrow = document.querySelector('.next');
+    let currentSlide = 0;
+    let slideInterval = setInterval(nextSlide, 3000);
+
+    function updateSlides() {
+      const slideWidth = slides[0].offsetWidth + 20; // Include margin
+      slidesWrapper.style.transform = `translateX(-${currentSlide * slideWidth}px)`;
+      slides.forEach((slide, i) => {
+        slide.classList.remove('active');
+        dots[i].classList.remove('active');
+        if (i === currentSlide) {
+          slide.classList.add('active');
+          dots[i].classList.add('active');
+        }
+      });
+    }
+
+    function nextSlide() {
+      currentSlide = (currentSlide + 1) % slides.length;
+      updateSlides();
+    }
+
+    function prevSlide() {
+      currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+      updateSlides();
+    }
+
+    prevArrow.addEventListener('click', () => {
+      prevSlide();
+      resetInterval();
+    });
+
+    nextArrow.addEventListener('click', () => {
+      nextSlide();
+      resetInterval();
+    });
+
+    dots.forEach((dot, index) => {
+      dot.addEventListener('click', () => {
+        currentSlide = index;
+        updateSlides();
+        resetInterval();
+      });
+    });
+
+    function resetInterval() {
+      clearInterval(slideInterval);
+      slideInterval = setInterval(nextSlide, 3000);
+    }
+
+    // Pause slideshow on hover
+    document.querySelector('.slideshow-container').addEventListener('mouseenter', () => {
+      clearInterval(slideInterval);
+    });
+
+    document.querySelector('.slideshow-container').addEventListener('mouseleave', () => {
+      slideInterval = setInterval(nextSlide, 3000);
+    });
+
+    // Initialize slideshow
+    updateSlides();
+
+    // Update slideshow on window resize
+    window.addEventListener('resize', updateSlides);
   </script>
 </body>
 </html>
